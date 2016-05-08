@@ -1,0 +1,27 @@
+Rem=rho*Um*delta/mu
+Retau=rho*Utau*delta/mu
+
+a=sqrt(gamma*p/rho)
+Mm=Um/a
+Utau=sqrt(tau/rho)
+
+Cf=tau/(0.5*rho*Um*Um)
+Cf=0.073*pow(Rem,-0.25)
+
+
+
+::
+gamma:=1.4
+p:=1.00[Pa]
+Mm:=0.1
+Um:=1.0[m/s]
+delta:=1.0[m]
+Retau:=180
+
+rho=0.05[kg/m^3]
+mu=1e-5[Pa s]
+a=1.2[m/s]
+Utau=1[m/s]
+tau=0.0001[Pa]
+Rem=2000
+Cf=0.1
