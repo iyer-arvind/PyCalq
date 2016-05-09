@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from collections import OrderedDict
+import itertools as it
 import re
 import sys
 
@@ -16,9 +17,39 @@ lcls = {'pi': np.pi, 'sqrt': np.sqrt, 'pow': np.power,
 np.seterr(all='ignore')
 
 
+def get_solution_order(var_list):
+    all_vars = set(k for v in var_list for k in v)
+    assert len(all_vars) <= len(var_list)
+    ev_list = list(enumerate(var_list))
+
+    def resolve(level):
+        for prm in it.permutations(ev_list, level):
+            eq, vl = zip(*prm)
+            vv = set(k for v in vl for k in v)
+            if len(vv) == level:
+                nl = [(e[0], e[1]-vv) for e in ev_list if e[0] not in eq]
+                return eq, nl, vv
+        return None, None, None
+
+    sol_ord = []
+
+    while ev_list:
+        for N in range(1, len(ev_list)+1):
+            eqsolve, new_list, vv = resolve(N)
+            if eqsolve is not None:
+                ev_list = new_list
+                sol_ord.append((eqsolve, vv))
+                break
+        else:
+            raise ValueError
+
+    return sol_ord
+
+
 def parse_input(file_name):
     with open(sys.argv[1], 'r') as fh:
         eqns = []
+        var_list = []
         STATE = 'E'
         lcl = dict(lcls)
         vardict = OrderedDict()
@@ -37,6 +68,7 @@ def parse_input(file_name):
                 continue
 
             if STATE == 'E':
+                var_list.append(set(re.findall(r'[^\d\W]\w*', line)))
                 I = line.index('=')
                 eqns.append(('('+line[:I]+')', '('+line[I+1:]+')'))
 
@@ -51,7 +83,14 @@ def parse_input(file_name):
                     vardict[var] = eval(val, lcls)
                     lcl.update(vardict)
 
-    return eqns, vardict, pardict
+    for v in var_list:
+        v -= set(pardict)
+        v -= set(lcls)
+
+    eqns_order = get_solution_order(var_list)
+
+    return ([(tuple(eqns[e] for e in eo), vv) for eo, vv in eqns_order],
+            vardict, pardict)
 
 
 def solve(eqns, vardict, pardict):
@@ -109,10 +148,9 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     eqns, vardict, pardict = parse_input(args.input)
-    vals = solve(eqns, vardict, pardict)
-
-    print('{} equations, {} variables, {} parameters'.format(
-        len(eqns), len(vardict), len(pardict)))
+    for eq, vv in eqns:
+        vals = solve(eq, {v: vardict[v] for v in vv}, pardict)
+        pardict.update(vals)
 
     from tabulate import tabulate
-    print(tabulate(vals.items()))
+    print(tabulate((v, pardict[v]) for v in vardict))
