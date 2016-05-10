@@ -139,8 +139,7 @@ def solve(eqns, vardict, pardict):
     return dict((n, m if u.dimensionless else m*u)
                 for n, m, u in zip(var_n, var_m, var_u))
 
-
-if __name__ == '__main__':
+def main():
     from argparse import ArgumentParser
     parser = ArgumentParser(
         'Simultaneous NonLinear Equation Solver with Units')
@@ -154,3 +153,7 @@ if __name__ == '__main__':
 
     from tabulate import tabulate
     print(tabulate((v, pardict[v]) for v in vardict))
+
+
+if __name__ == '__main__':
+    main()

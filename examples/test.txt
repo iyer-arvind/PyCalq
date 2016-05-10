@@ -9,7 +9,8 @@ Cf=tau/(0.5*rho*Um*Um)
 Cf=0.073*pow(Rem,-0.25)
 
 Uc/Um=1.28*pow(Rem,-0.0116)
-yplus=Utau*rho*y/mu
+yplus1=Utau*rho*y1/mu
+yplus2=Utau*rho*y2/mu
 
 
 
@@ -20,7 +21,8 @@ Mm:=0.1
 Um:=1.0
 delta:=1.0
 Retau:=180
-yplus:=0.5
+yplus1:=1.0
+yplus2:=10
 
 rho=0.05
 mu=1e-5
@@ -30,4 +32,5 @@ tau=0.0001
 Rem=2000
 Cf=0.1
 Uc=1/1
-y=0.001
+y1=0.001
+y2=0.001
