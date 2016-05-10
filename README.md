@@ -61,7 +61,8 @@ changed
 values are used as initial guess
 
 Units
----
+-----
+
 PyCalq supports units using pint. Suppose in the above problem, S was in
 kilometers, v in miles per hour, and t in hours,
 we can wrie the input as 
@@ -92,6 +93,7 @@ Which gives
 
 
 License
+-------
 
 PyCalc is released under the New BSD License (see the LICENSE file for
 details). Documentation is made available under a Creative Commons Attribution
