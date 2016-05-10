@@ -39,10 +39,10 @@ So this problem can be described as:
 The calculator can be invoked with 
 
     $ pycalq kinematics.txt
-        -----------
+    -----------
 		a   0.0333333
 		t  30
-	    ----------
+    ----------
 
 Which immediately tells that the acceleration is 0.0333 and it takes 30 time units.
 Note that the equations were not explicit in acceleration or time.
@@ -75,9 +75,9 @@ we can wrie the input as
 Which gives
 
 	$ pycalq Kinematics-u.txt
-  -  -----------------------------------------
+  -----------------------------------------
 	a  6.661492053333608e-06 meter / second ** 2
 	t  18.641135767119685 hour
-	-  -----------------------------------------
+	-----------------------------------------
 
 
