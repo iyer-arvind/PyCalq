@@ -40,8 +40,8 @@ The calculator can be invoked with
 
     $ pycalq kinematics.txt
     -----------
-		a   0.0333333
-		t  30
+    a   0.0333333
+    t  30
     ----------
 
 Which immediately tells that the acceleration is 0.0333 and it takes 30 time units.
@@ -60,24 +60,24 @@ we can wrie the input as
 
 > Kinematics-u.txt
 
-	S = u*t + 0.5*a*t*t                                                            
-	v = u + a*t                                                                    
+    S = u*t + 0.5*a*t*t                                                            
+    v = u + a*t                                                                    
                                                                                
                                                                                
-	::                                                                             
-	S := 15.0[km]                                                                  
-	u := 0.0[m/s]                                                                  
-	v := 1.0[mph]                                                                  
-	                                                                               
-	a = 0.0[m/s/s]                                                                 
-	t = 10.0[hours]                                                                
+    ::                                                                             
+    S := 15.0[km]                                                                  
+    u := 0.0[m/s]                                                                  
+    v := 1.0[mph]                                                                  
+                                                                                   
+    a = 0.0[m/s/s]                                                                 
+    t = 10.0[hours]                                                                
 
 Which gives
 
-	$ pycalq Kinematics-u.txt
-  -----------------------------------------
-	a  6.661492053333608e-06 meter / second ** 2
-	t  18.641135767119685 hour
-	-----------------------------------------
+    $ pycalq Kinematics-u.txt
+    -----------------------------------------
+    a  6.661492053333608e-06 meter / second ** 2
+    t  18.641135767119685 hour
+    -----------------------------------------
 
 
