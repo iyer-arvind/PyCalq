@@ -19,7 +19,7 @@ np.seterr(all='ignore')
 
 def get_solution_order(var_list):
     all_vars = set(k for v in var_list for k in v)
-    assert len(all_vars) <= len(var_list)
+    assert len(all_vars) <= len(var_list), 'vars: {} not same as {}'.format(all_vars, var_list)
     ev_list = list(enumerate(var_list))
 
     def resolve(level):
@@ -75,12 +75,12 @@ def parse_input(file_name):
             elif STATE == 'G':
                 if ':=' in line:
                     var, val = line.split(':=')
-                    pardict[var] = eval(val, lcls)
-                    lcl.update(vardict)
+                    pardict[var.strip()] = eval(val, lcls)
+                    lcl.update(pardict)
 
                 else:
                     var, val = line.split('=')
-                    vardict[var] = eval(val, lcls)
+                    vardict[var.strip()] = eval(val, lcls)
                     lcl.update(vardict)
 
     for v in var_list:
